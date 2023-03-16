@@ -4100,7 +4100,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -793530909, guid: 06ad5329c15c00443892eadc3dd4582a, type: 3}
+  m_Sprite: {fileID: -1529178384, guid: 659849baccfa9ca4d8ab951dc26af8a9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5162,6 +5162,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1692079314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6194,7 +6195,7 @@ GameObject:
   - component: {fileID: 2068827503}
   - component: {fileID: 2068827502}
   m_Layer: 5
-  m_Name: Grassy Jumps (2)
+  m_Name: Plumbers Dream
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6274,7 +6275,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 12312
           m_FloatArgument: 0
-          m_StringArgument: Demo_Scene
+          m_StringArgument: Pipes
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2068827503
@@ -6373,7 +6374,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'GRassy Jumps
+  m_text: 'Plumbers Dream
 
 '
   m_isRightToLeft: 0
@@ -6402,7 +6403,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 31
+  m_fontSize: 26.3
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
