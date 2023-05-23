@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Demo_Scene.unity
     guid: 662d47871337688418da0c3859902626
+  - enabled: 1
+    path: Assets/Scenes/Pipes.unity
+    guid: 1c5cffb148905774e8e11ffe27bd7618
+  - enabled: 1
+    path: Assets/Scenes/Cave_Crawl.unity
+    guid: 465660ca086cbcb4fbfeac5899d9d028
   m_configObjects: {}

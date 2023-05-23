@@ -373,7 +373,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.6695, y: -431}
+  m_AnchoredPosition: {x: 2.6695, y: -251.00003}
   m_SizeDelta: {x: 469.3385, y: 153.7122}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &120579579
@@ -594,7 +594,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &439502687
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1075,8 +1075,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 2.6695, y: -143.54999}
-  m_SizeDelta: {x: 1465.6, y: 285.60498}
+  m_AnchoredPosition: {x: 2.6695, y: -123.33374}
+  m_SizeDelta: {x: 1465.6, y: 245.1724}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &881114046
 MonoBehaviour:
@@ -1098,7 +1098,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Take a Chance
+  m_text: Wildcard Roulette
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d5c4b4f9d2e8bab4b940d749b6070a8c, type: 2}
   m_sharedMaterial: {fileID: 8052514945416581251, guid: d5c4b4f9d2e8bab4b940d749b6070a8c, type: 2}
@@ -1125,12 +1125,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 144.35
-  m_fontSizeBase: 36
+  m_fontSize: 108.6
+  m_fontSizeBase: 105
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 148
+  m_fontSizeMax: 143.6
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
