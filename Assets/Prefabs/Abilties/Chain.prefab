@@ -4996,6 +4996,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d38366ffa80df2548b7afc5dd630db3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ability_name: Chain
+  badge: {fileID: 21300000, guid: 5d2ba5bfabd3f184f9cee80878aa67f5, type: 3}
+  description: <u><b>Grappling Hook</b></u><br> Sends a grappling hook pulling however
+    it hits towards you.
   damage: 4
   owner: {fileID: 0}
   spawnOffset: {x: 0.6, y: 0}

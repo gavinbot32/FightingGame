@@ -13,6 +13,7 @@ public class CharCursor : MonoBehaviour
     GameManager manager;
 
     public PlayerContainerUI playerContainerPrefab;
+    public PlayerControlUI playerControlPrefab;
 
     private bool navLock;
     public int rIndex = 0;
@@ -38,6 +39,7 @@ public class CharCursor : MonoBehaviour
         }
         selected = rows[rIndex,cIndex].transform;
         transform.position = selected.position;
+
     }
 
     private void navUp()
@@ -47,6 +49,8 @@ public class CharCursor : MonoBehaviour
             rIndex--;
             checkIndex();
         }
+        checkOverlap();
+
     }
     private void navDown()
     {
@@ -55,6 +59,8 @@ public class CharCursor : MonoBehaviour
             rIndex++;
             checkIndex();
         }
+        checkOverlap();
+
     }
     private void navLeft()
     {
@@ -63,6 +69,8 @@ public class CharCursor : MonoBehaviour
             cIndex--;
             checkIndex();
         }
+        checkOverlap();
+
     }
     private void navRight()
     {
@@ -71,8 +79,26 @@ public class CharCursor : MonoBehaviour
             cIndex++;
             checkIndex();
         }
+        checkOverlap();
     }
     
+
+    private void checkOverlap()
+    {
+        CharCursor[] cursors = FindObjectsOfType<CharCursor>();
+        foreach(CharCursor cursor in cursors)
+        {
+            if (cursor.gameObject != this.gameObject)
+            {
+                if (cursor.selected == selected)
+                {
+                    transform.SetSiblingIndex(cursor.transform.GetSiblingIndex() -1);
+                }
+            }
+        }
+    }
+
+
     private void charSelect()
     {
         if (lifetime >= 30)
@@ -142,6 +168,20 @@ public class CharCursor : MonoBehaviour
         PlayerContainerUI containerUI = Instantiate(playerContainerPrefab, manager.playerContainerParent).GetComponent<PlayerContainerUI>();
         containerUI.intialized(Color.green, manager.player_badges_dict[manager.player_strings[skinIndex]]);
         p.GetComponent<PlayerController>().setUIContainer(containerUI);
+
+
+        //Create Control Unit
+        bool keyboard = false;
+        PlayerControlUI controlUI = Instantiate(playerControlPrefab, manager.playerControlsParent).GetComponent<PlayerControlUI>();
+        if(p.currentControlScheme == "keyboard" || p.currentControlScheme == "Keyboard")
+        {
+            keyboard = true;
+        }
+        PlayerController player = p.GetComponent<PlayerController>();
+        Ability ability = player.attackPrefab.GetComponent<Ability>();
+        controlUI.intialized(ability.badge, keyboard,ability.description);
+        p.GetComponent<PlayerController>().setUIControls(controlUI);
+
         //Add Player to list
         manager.players.Add(p.GetComponent<PlayerController>());
         //change position

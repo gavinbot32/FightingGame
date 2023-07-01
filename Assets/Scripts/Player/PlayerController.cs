@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Transform muzzle;
     public PlayerContainerUI uiContainer;
+    public PlayerControlUI uiControls;
     public GameObject deathParticle;
 
     public GameObject spriteObj;
@@ -73,6 +74,7 @@ public class PlayerController : MonoBehaviour
         audi = GetComponent<AudioSource>();
         rig = GetComponent<Rigidbody2D>();
         muzzle = GameObject.FindGameObjectWithTag("Muzzle").GetComponent<Transform>();
+        attackPrefab = attackPrefabs[Random.Range(0, attackPrefabs.Length)];
 
     }
     // Start is called before the first frame update
@@ -86,7 +88,6 @@ public class PlayerController : MonoBehaviour
         curJumps = maxJumps;
         died = false;
         score = 0;
-        attackPrefab = attackPrefabs[Random.Range(0, attackPrefabs.Length)];
         uiContainer.updateHealthBar(curHp, maxHp);
         canMelee = true;
     }
@@ -307,6 +308,10 @@ public class PlayerController : MonoBehaviour
     {
         this.uiContainer = pcu;
     }
+    public void setUIControls(PlayerControlUI pcu)
+    {
+        this.uiControls = pcu;
+    }
     public void setCondition(Condition condition)
     {
         GameObject con = Instantiate(condition.gameObject, transform.position, Quaternion.identity);
@@ -401,6 +406,17 @@ public class PlayerController : MonoBehaviour
         {
             print("pressed pause");
 
+        }   
+    }
+    public void onTabInput(InputAction.CallbackContext context)
+    {
+        if(context.phase == InputActionPhase.Started)
+        {
+            uiControls.mainContainer.gameObject.SetActive(true);
+        }
+        if(context.phase == InputActionPhase.Canceled)
+        {
+            uiControls.mainContainer.gameObject.SetActive(false);
         }
     }
 

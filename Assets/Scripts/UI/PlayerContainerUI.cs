@@ -24,7 +24,6 @@ public class PlayerContainerUI : MonoBehaviour
     public void intialized(Color color,Sprite badgeSprite)
     {
         badge.sprite = badgeSprite;
-        scoreText.color = color;
         healthBarFill.color = color;
         
         scoreText.text = "0";

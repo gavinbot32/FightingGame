@@ -162,6 +162,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8f13f121a780add4393fc53f3745dd8b, type: 3}
   muzzle: {fileID: 0}
   uiContainer: {fileID: 0}
+  uiControls: {fileID: 0}
   deathParticle: {fileID: 6092355925210957062, guid: 44ddb1d6b994ac144a78fd7b421b621d, type: 3}
   spriteObj: {fileID: 1180140266137023761}
   meleePrefab: {fileID: 4838635278182202720}
@@ -487,6 +488,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 3c5415a3-ec59-4e9c-8eb0-6ceb720f4c39
     m_ActionName: mainControls/Pause[/Keyboard/escape,/XInputControllerWindows/start]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1180140266014251750}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: onTabInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 41c4a933-0e2a-41be-ba3e-9210699e869a
+    m_ActionName: mainControls/Tab[/XInputControllerWindows/rightShoulder,/Keyboard/tab]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: mainControls

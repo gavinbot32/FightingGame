@@ -234,6 +234,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e231f99252de9b347b25c96746ce0215, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ability_name: Iceball
+  badge: {fileID: 21300000, guid: 5f8500812ced5fd4c829ab33b2114e7b, type: 3}
+  description: <u><b>Iceball</b></u><br> Throws a ball of ice freezing anyone it
+    hits.
   damage: 3
   owner: {fileID: 0}
   spawnOffset: {x: 0.3, y: 0}

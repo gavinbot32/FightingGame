@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Ability : MonoBehaviour
 {
+    [Header("UI Stuff")]
+    public string ability_name;
+    public Sprite badge;
+    public string description;
 
     public float damage;
     public PlayerController owner;

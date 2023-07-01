@@ -27,18 +27,20 @@ public class GameManager : MonoBehaviour
 
     public List<PlayerController> winningPlayers;
 
+
     [Header("Prefab Refs")]
     public GameObject deathEffectPrefab;
 
     public static GameManager instance;
     public GameObject playerPrefab;
+
+
     [Header("Character Grid")]
     public int rowCount;
     public int colCount;
     public GameObject canvas;
-
-    public CharacterCell[] a, b, c, d;
     public CharacterCell[,] rows;
+    
 
     [Header("Compnents")]
     public AudioSource audio;
@@ -56,13 +58,14 @@ public class GameManager : MonoBehaviour
 
     [Header("UI Components")]
     public Transform playerContainerParent;
+    public Transform playerControlsParent;
     public Transform textContainerParent;
-    public GameObject playerTextPrefab;
     public TextMeshProUGUI timerTxt;
     public GameObject timerObj;
+    public GameObject playerTextPrefab;
 
-    public TextMeshProUGUI errorTxt;
     [Header("Debug")]
+    public TextMeshProUGUI errorTxt;
     public bool debug = false;
 
     private void Awake()
@@ -72,10 +75,12 @@ public class GameManager : MonoBehaviour
         timerObj.SetActive(false);
         maxTime = PlayerPrefs.GetInt("roundTimer",100);
         curTime = maxTime;
-
         instance = this;
         audio = GetComponent<AudioSource>();
         player_badges_dict = new Dictionary<string,Sprite>();
+        canvas = FindObjectOfType<CharacterSelectionManager>().canvas;
+        rowCount = canvas.GetComponent<CharacterSelectionManager>().rowCount;
+        colCount = canvas.GetComponent<CharacterSelectionManager>().colCount;
     }
 
 
@@ -93,13 +98,11 @@ public class GameManager : MonoBehaviour
             player_badges_dict.Add(key, value);
 
         }
-        
 
 
-        rows = new CharacterCell[3,4]{
-            {a[0],a[1],a[2],a[3]},
-            {b[0],b[1],b[2],b[3]},
-            {c[0],c[1],c[2],c[3]},};
+        rows = canvas.GetComponent<CharacterSelectionManager>().rows;
+
+       
         localPoints = spawnPoints;
         
     }

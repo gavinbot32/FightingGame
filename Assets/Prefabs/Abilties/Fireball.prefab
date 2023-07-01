@@ -5046,6 +5046,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e231f99252de9b347b25c96746ce0215, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ability_name: Fireball
+  badge: {fileID: 21300000, guid: dcb32fce1c5a5c14e86dc46d0a018aed, type: 3}
+  description: <u><b>Fireball</b></u><br> Throws a ball of fire setting anyone it
+    hits on fire.
   damage: 3
   owner: {fileID: 0}
   spawnOffset: {x: 0.3, y: 0}
