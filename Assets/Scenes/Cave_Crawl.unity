@@ -2588,10 +2588,6 @@ PrefabInstance:
       value: _GameManager
       objectReference: {fileID: 0}
     - target: {fileID: 6443924122902387253, guid: 37ed586df20f302418900cee2d3b2bca, type: 3}
-      propertyPath: canvas
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6443924122902387253, guid: 37ed586df20f302418900cee2d3b2bca, type: 3}
       propertyPath: errorTxt
       value: 
       objectReference: {fileID: 490110149}
@@ -2619,10 +2615,6 @@ PrefabInstance:
       propertyPath: playerContainerParent
       value: 
       objectReference: {fileID: 1712238374}
-    - target: {fileID: 6443924122902387253, guid: 37ed586df20f302418900cee2d3b2bca, type: 3}
-      propertyPath: spawnPoints.Array.size
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 6443924122902387253, guid: 37ed586df20f302418900cee2d3b2bca, type: 3}
       propertyPath: spawnPoints.Array.data[0]
       value: 

@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - Muzzle
   - Attack
+  - Melee_Attack
   layers:
   - Default
   - TransparentFX

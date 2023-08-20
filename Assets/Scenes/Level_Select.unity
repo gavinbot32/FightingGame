@@ -2003,7 +2003,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 100
+  m_text: 30
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d5c4b4f9d2e8bab4b940d749b6070a8c, type: 2}
   m_sharedMaterial: {fileID: 8052514945416581251, guid: d5c4b4f9d2e8bab4b940d749b6070a8c, type: 2}
@@ -5447,7 +5447,7 @@ MonoBehaviour:
   sliderValue: {fileID: 906291045}
   sliderMin: {fileID: 789138571}
   sliderMax: {fileID: 872788530}
-  timeMin: 100
+  timeMin: 30
   timeMax: 500
 --- !u!114 &1616115587
 MonoBehaviour:
