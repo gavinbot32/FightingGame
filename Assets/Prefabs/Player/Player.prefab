@@ -142,9 +142,9 @@ MonoBehaviour:
   - {fileID: 2824450269426493278, guid: fea2402092760654c90534e47ac6b723, type: 3}
   - {fileID: 921401663851892326, guid: dbbafe6dbf58157448674d01a04a3e72, type: 3}
   - {fileID: 7929877074936835752, guid: 7c9344159de075d4b9a7716efbffac9f, type: 3}
-  - {fileID: 8014009560633888196, guid: 1fbea42571795ac4ba2c2dcbf992c65b, type: 3}
+  - {fileID: 8894668398279319776, guid: d1269e720aada85449e2a9e7e5e87ed3, type: 3}
   passivePrefabs: []
-  attackPrefab: {fileID: 0}
+  attackPrefab: {fileID: 8894668398279319776, guid: d1269e720aada85449e2a9e7e5e87ed3, type: 3}
   passivePrefab: {fileID: 0}
   skinIndex: 0
   anim: {fileID: 0}

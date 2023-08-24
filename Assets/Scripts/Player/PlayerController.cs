@@ -263,7 +263,8 @@ public class PlayerController : MonoBehaviour
 
     public void spawnAbilityPrefab()
     {
-        GameObject prefab = Instantiate(attackPrefab, transform.position, Quaternion.identity);
+        Ability ability = attackPrefab.GetComponent<Ability>();
+        GameObject prefab = Instantiate(attackPrefab, new Vector3(transform.position.x+ability.spawnOffset.x, transform.position.y+ability.spawnOffset.y, transform.position.z), Quaternion.identity);
         prefab.GetComponent<Ability>().owner = this;
 
     }

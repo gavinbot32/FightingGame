@@ -567,20 +567,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d512f3d1e07c71041b15803a96869652, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meanPos: {x: 0, y: 0, z: 0}
-  ready: 0
-  manager: {fileID: 0}
-  zoomTime: 0.5
-  players: []
-  topCap: -1.5
-  bttmCap: -2.5
-  lftCap: 0.6
-  rghtCap: 1.2
-  distance: 0
-  camSize: 0
-  camSizeTemp: 0
-  camMax: 7
-  camMin: 3
+  targets: []
+  offset: {x: 0, y: 0, z: 0}
 --- !u!1 &541954195
 GameObject:
   m_ObjectHideFlags: 0

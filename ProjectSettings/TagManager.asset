@@ -8,6 +8,7 @@ TagManager:
   - Muzzle
   - Attack
   - Melee_Attack
+  - Effect
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - Player
   - Objects
   - Ground
-  - 
+  - Non-Collide Objects
   - 
   - 
   - 
