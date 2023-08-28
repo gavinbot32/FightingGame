@@ -26,6 +26,8 @@ public class Ability : MonoBehaviour
         audio = GetComponent<AudioSource>();
     }
 
+
+
     public void conditionSet(PlayerController player)
     {
         if (condition != null)
@@ -42,6 +44,14 @@ public class Ability : MonoBehaviour
             {
                 player.setCondition(condition);
             }
+        }
+    }
+
+    public void lifeCheck()
+    {
+        if(lifetime <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class CharCursor : MonoBehaviour
 {
+    public PlayerSettings settings;
+
     public Transform selected;
     public PlayerInput input;
     public CharacterCell[,] rows;
@@ -160,13 +162,13 @@ public class CharCursor : MonoBehaviour
         PlayerInput p = PlayerInput.Instantiate(manager.playerPrefab, playerIndex: input.playerIndex, controlScheme: input.currentControlScheme, pairWithDevice: input.devices[0]);
         p.transform.SetParent(null);
         //Setting Skin
-        p.GetComponentInChildren<SpriteRenderer>().sprite = manager.player_skins[skinIndex];
+        p.GetComponentInChildren<SpriteRenderer>().sprite = settings.player_skins[skinIndex];
         p.GetComponent<Animator>().SetInteger("skinIndex", skinIndex);
         p.GetComponent<PlayerController>().skinIndex = skinIndex;
 
         //Create ui container
         PlayerContainerUI containerUI = Instantiate(playerContainerPrefab, manager.playerContainerParent).GetComponent<PlayerContainerUI>();
-        containerUI.intialized(Color.green, manager.player_badges_dict[manager.player_strings[skinIndex]]);
+        containerUI.intialized(Color.green, manager.player_badges_dict[settings.player_strings[skinIndex]]);
         p.GetComponent<PlayerController>().setUIContainer(containerUI);
 
 

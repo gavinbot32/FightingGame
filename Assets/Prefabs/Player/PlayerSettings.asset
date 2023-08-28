@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b6d82ca0a4952b4aa5e65221edbc3ff, type: 3}
+  m_Name: PlayerSettings
+  m_EditorClassIdentifier: 
+  player_colors:
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 1, g: 0, b: 0.72458935, a: 1}
+  - {r: 0.57220507, g: 0, b: 1, a: 1}
+  - {r: 0.013375282, g: 0, b: 1, a: 1}
+  - {r: 0, g: 0.55133057, b: 1, a: 1}
+  - {r: 0.8962264, g: 0.68940496, b: 0, a: 1}
+  - {r: 0.22345018, g: 1, b: 0, a: 1}
+  player_skins:
+  - {fileID: 692656023, guid: a8907101b578d7149859c34060b63a08, type: 3}
+  - {fileID: 936143711, guid: 9aa9810608d024249be44dac88437bd1, type: 3}
+  - {fileID: 693012709, guid: b8b06e8b1be55fc4a967b5b244a3652b, type: 3}
+  - {fileID: -336963990, guid: 1ee00812e3d41c740b61d093c5d118e3, type: 3}
+  - {fileID: -697968062, guid: 9a27bc7cd6a35334e84c0119f417c909, type: 3}
+  - {fileID: -1893723586, guid: aef2483847a474e408fe6a21e78f23ad, type: 3}
+  - {fileID: 2057598952, guid: dadd52ba45f03fb42b54a3248c92249e, type: 3}
+  - {fileID: 2022371150, guid: 694c32f0a75ee5143900a85d7160aa2f, type: 3}
+  - {fileID: 1583591926, guid: 3d385c3b6925148408cb39570d5522af, type: 3}
+  - {fileID: -205643474, guid: 1b4d4998ef046024d8184996e6cfb865, type: 3}
+  - {fileID: -440399981, guid: 52f0b39773dab5b4f9908fe8b7b87ccd, type: 3}
+  - {fileID: 1049665803, guid: 2a7304f4d7d0f9e4687de8f194f70e4c, type: 3}
+  player_strings:
+  - Imposter
+  - Chief
+  - Marcus
+  - WokaWoka
+  - The Bat
+  - Society
+  - Pirate
+  - mar
+  - peepo
+  - santa
+  - dummy
+  player_badges:
+  - {fileID: 21300000, guid: 49cdaa04d8f4d15429500b50d9dc7ff5, type: 3}
+  - {fileID: 21300000, guid: 0a48cd7e4ce3c034aa270782abf29551, type: 3}
+  - {fileID: 21300000, guid: 96f8c377b86191c438c47257c196b4a3, type: 3}
+  - {fileID: 21300000, guid: ac42104fd4ae58d4a82921cf4b2204e8, type: 3}
+  - {fileID: 21300000, guid: fae677a01feafab4bb27b1c67461affa, type: 3}
+  - {fileID: 21300000, guid: 9387258949c515f4cbd33b43713cc339, type: 3}
+  - {fileID: 21300000, guid: 6543f6d2f693aec408b4814aa99840d2, type: 3}
+  - {fileID: 21300000, guid: aaef2c764d275514fa7a5d35c8d3a871, type: 3}
+  - {fileID: 21300000, guid: 8b24724a9a6d206499d303b7bcebcbe6, type: 3}
+  - {fileID: 21300000, guid: d2fe7259ed81f9c46aa532ca3ce9f998, type: 3}
+  - {fileID: 21300000, guid: cf45eb6a0e1c26c4fafe8ec8a6b81402, type: 3}
+  attackPrefabs:
+  - {fileID: 8933152284619414906, guid: f257c4460967d894d962df759ffd213b, type: 3}
+  - {fileID: 2824450269426493278, guid: fea2402092760654c90534e47ac6b723, type: 3}
+  - {fileID: 921401663851892326, guid: dbbafe6dbf58157448674d01a04a3e72, type: 3}
+  - {fileID: 7929877074936835752, guid: 7c9344159de075d4b9a7716efbffac9f, type: 3}
+  - {fileID: 8894668398279319776, guid: d1269e720aada85449e2a9e7e5e87ed3, type: 3}
+  - {fileID: 1979925889768983313, guid: 7bd8992b1d5f4394fb8843cfc2d7d252, type: 3}
+  passivePrefabs: []

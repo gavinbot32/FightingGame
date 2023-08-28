@@ -10,13 +10,9 @@ using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
-    
+    public PlayerSettings settings;
 
     [Header("Player Refs")]
-    public Color[] player_colors;
-    public Sprite[] player_skins;
-    public string[] player_strings;
-    public Sprite[] player_badges;
     public Dictionary<string,Sprite> player_badges_dict;
     public Animator[] anims;
     public List<PlayerController> players = new List<PlayerController>();
@@ -91,10 +87,10 @@ public class GameManager : MonoBehaviour
         winningPlayers = new List<PlayerController>();
         playerInputManager = FindObjectOfType<PlayerInputManager>();
         playerInputManager.gameObject.SetActive(true);
-        for (int i = 0; i < player_badges.Length; i++)
+        for (int i = 0; i < settings.player_badges.Length; i++)
         {
-            string key = player_strings[i];
-            Sprite value = player_badges[i];
+            string key = settings.player_strings[i];
+            Sprite value = settings.player_badges[i];
             player_badges_dict.Add(key, value);
 
         }
@@ -190,8 +186,8 @@ public class GameManager : MonoBehaviour
         {
             audio.PlayOneShot(playlist[Random.Range(0, 2)]);
             cursor.transform.SetParent(canvas.transform);
-            cursor.GetComponentInChildren<Image>().color = player_colors[cursors.Count];
-            cursor.GetComponent<CharCursor>().cursorColor = player_colors[cursors.Count];
+            cursor.GetComponentInChildren<Image>().color = settings.player_colors[cursors.Count];
+            cursor.GetComponent<CharCursor>().cursorColor = settings.player_colors[cursors.Count];
             cursor.GetComponent<CharCursor>().playerIndex = cursors.Count + 1;
             cursors.Add(cursor.GetComponent<CharCursor>());
             GameObject playerchcktxt = Instantiate(playerTextPrefab, textContainerParent);

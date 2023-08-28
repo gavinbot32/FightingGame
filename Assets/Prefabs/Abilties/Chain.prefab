@@ -5014,6 +5014,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5a9fc1f0a70657345b4825fb8f918754, type: 3}
   - {fileID: 8300000, guid: a9a76f1f51fe68040909ed5a8e01818c, type: 3}
   condition: {fileID: 0}
+  ignoreTags:
+  - Effect
+  - Attack
   hooked: 0
   target: {fileID: 0}
   targetPos: {x: 0, y: 0, z: 0}

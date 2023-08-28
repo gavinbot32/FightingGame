@@ -90,6 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acc5672aed9719a48a53edfed3bcbc9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settings: {fileID: 11400000, guid: d20a5d732f8ba7c47bf8582f7ac74525, type: 2}
   selected: {fileID: 0}
   input: {fileID: 0}
   cursorColor: {r: 0, g: 0, b: 0, a: 0}

@@ -122,6 +122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 0}
+  settings: {fileID: 11400000, guid: d20a5d732f8ba7c47bf8582f7ac74525, type: 2}
   maxHp: 100
   maxJumps: 3
   curHp: 0
@@ -137,13 +138,6 @@ MonoBehaviour:
   lastAttackTime: 0
   attackSpeed: 10
   attackDmg: 3
-  attackPrefabs:
-  - {fileID: 8933152284619414906, guid: f257c4460967d894d962df759ffd213b, type: 3}
-  - {fileID: 2824450269426493278, guid: fea2402092760654c90534e47ac6b723, type: 3}
-  - {fileID: 921401663851892326, guid: dbbafe6dbf58157448674d01a04a3e72, type: 3}
-  - {fileID: 7929877074936835752, guid: 7c9344159de075d4b9a7716efbffac9f, type: 3}
-  - {fileID: 8894668398279319776, guid: d1269e720aada85449e2a9e7e5e87ed3, type: 3}
-  passivePrefabs: []
   attackPrefab: {fileID: 8894668398279319776, guid: d1269e720aada85449e2a9e7e5e87ed3, type: 3}
   passivePrefab: {fileID: 0}
   skinIndex: 0

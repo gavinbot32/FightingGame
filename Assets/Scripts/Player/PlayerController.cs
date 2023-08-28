@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public GameManager manager;
-
+    public PlayerSettings settings;
 
     [Header("Max Values")]
     public int maxHp;
@@ -34,8 +34,6 @@ public class PlayerController : MonoBehaviour
     public float lastAttackTime;
     public int attackSpeed;
     public float attackDmg;
-    public GameObject[] attackPrefabs;
-    public GameObject[] passivePrefabs;
     public GameObject attackPrefab;
     public GameObject passivePrefab;
     private bool canMelee;
@@ -74,7 +72,7 @@ public class PlayerController : MonoBehaviour
         audi = GetComponent<AudioSource>();
         rig = GetComponent<Rigidbody2D>();
         muzzle = GameObject.FindGameObjectWithTag("Muzzle").GetComponent<Transform>();
-        attackPrefab = attackPrefabs[Random.Range(0, attackPrefabs.Length)];
+        attackPrefab = settings.attackPrefabs[Random.Range(0, settings.attackPrefabs.Length)];
 
     }
     // Start is called before the first frame update

@@ -120,7 +120,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0013003945, y: -0.06631768}
+  m_Offset: {x: 0.00021380931, y: -0.06631768}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -131,7 +131,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.35855913, y: 0.37936473}
+  m_Size: {x: 0.11325975, y: 0.37936473}
   m_EdgeRadius: 0
 --- !u!1 &955525438253245570
 GameObject:
@@ -249,7 +249,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 0.4
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -4958,7 +4958,7 @@ GameObject:
   - component: {fileID: 6337002533601243589}
   m_Layer: 7
   m_Name: Gas
-  m_TagString: Untagged
+  m_TagString: Effect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9919,7 +9919,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 0.4
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -14629,7 +14629,7 @@ GameObject:
   - component: {fileID: 5630896362078077748}
   m_Layer: 7
   m_Name: PoisonCloud
-  m_TagString: Untagged
+  m_TagString: Attack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14699,7 +14699,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 1
+  m_Constraints: 5
 --- !u!114 &5630896362078077748
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Chain : Ability
 {
-
+    public string[] ignoreTags;
     public bool hooked;
 
     public GameObject target;
@@ -84,7 +85,10 @@ public class Chain : Ability
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
+        if(ignoreTags.Contains(collision.tag))
+        {
+            return;
+        }
         if (collision.gameObject != owner.gameObject && !hooked)
         {
            
