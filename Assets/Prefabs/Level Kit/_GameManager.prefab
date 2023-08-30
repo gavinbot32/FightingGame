@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95b77507216f141448b0b0cff3742857, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings: {fileID: 11400000, guid: d20a5d732f8ba7c47bf8582f7ac74525, type: 2}
+  settings: {fileID: 11400000, guid: d50763a96ab39d848a7ae7752966f4b8, type: 2}
   anims: []
   players: []
   cursors: []

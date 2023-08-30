@@ -11,7 +11,8 @@ public class PlayerSettings : ScriptableObject
     public Sprite[] player_skins;
     public string[] player_strings;
     public Sprite[] player_badges;
-
+    public Gradient[] player_gradients;
+    public Color[] skin_colors;
 
     [Header("Ability Refs")]
     public GameObject[] attackPrefabs;

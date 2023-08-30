@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     public GameManager manager;
     public PlayerSettings settings;
+    public PlayerSettings backup_settings;
 
     [Header("Max Values")]
     public int maxHp;
@@ -40,7 +41,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     [Header("Components")]
     public int skinIndex;
-    private Rigidbody2D rig;
+    public Rigidbody2D rig;
     [SerializeField]
     private Animator anim;
     [SerializeField]
@@ -72,8 +73,14 @@ public class PlayerController : MonoBehaviour
         audi = GetComponent<AudioSource>();
         rig = GetComponent<Rigidbody2D>();
         muzzle = GameObject.FindGameObjectWithTag("Muzzle").GetComponent<Transform>();
-        attackPrefab = settings.attackPrefabs[Random.Range(0, settings.attackPrefabs.Length)];
-
+        if (settings.attackPrefabs == null || settings.attackPrefabs.Length <= 0)
+        {
+            attackPrefab = backup_settings.attackPrefabs[Random.Range(0, settings.attackPrefabs.Length)];
+        }
+        else
+        {
+            attackPrefab = settings.attackPrefabs[Random.Range(0, settings.attackPrefabs.Length)];
+        }
     }
     // Start is called before the first frame update
     void Start()
@@ -95,7 +102,10 @@ public class PlayerController : MonoBehaviour
     {
 
         deathCheck();
-        uiContainer.updateChargeBar(Time.time - lastAttackTime, attackPrefab.GetComponent<Ability>().rof);
+        if (attackPrefab != null)
+        {
+            uiContainer.updateChargeBar(Time.time - lastAttackTime, attackPrefab.GetComponent<Ability>().rof);
+        }
     }
 
     public void deathCheck()
@@ -381,6 +391,7 @@ public class PlayerController : MonoBehaviour
     }
     public void onAbilityInput(InputAction.CallbackContext context)
     {
+        if (attackPrefab == null) { return; } 
         if (context.phase == InputActionPhase.Performed && Time.time - lastAttackTime > attackPrefab.GetComponent<Ability>().rof)
         {
            

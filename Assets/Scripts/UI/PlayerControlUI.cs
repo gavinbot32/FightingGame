@@ -35,6 +35,19 @@ public class PlayerControlUI : MonoBehaviour
 
     }
 
+    public void intialized(bool keyboard)
+    {
+
+        if (keyboard)
+        {
+            meleeAbility.sprite = e_key;
+        }
+
+        mainContainer.gameObject.active = false;
+
+
+    }
+
     // Start is called before the first frame update
     void Start()
     {
