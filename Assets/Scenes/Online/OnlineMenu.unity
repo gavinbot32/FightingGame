@@ -7803,7 +7803,7 @@ MonoBehaviour:
   name: 
   roomName: 
   selected_level: 
-  default_level: 
+  default_level: Mt_Sunset_PN
   roomBttnList: []
 --- !u!114 &1586018368
 MonoBehaviour:

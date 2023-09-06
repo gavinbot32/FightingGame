@@ -9,6 +9,7 @@ using UnityEngine.UI;
 using Random = UnityEngine.Random;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.Windows;
 
 
 public class OnlineGameManager : MonoBehaviourPun
@@ -19,13 +20,14 @@ public class OnlineGameManager : MonoBehaviourPun
     public Dictionary<string,Sprite> player_badges_dict;
     public Animator[] anims;
     public List<PlayerController> players = new List<PlayerController>();
-    public List<CharCursor> cursors = new List<CharCursor>();
+    public List<CharCursor_PN> cursors = new List<CharCursor_PN>();
 
     public Transform[] spawnPoints;
     public Transform[] localPoints;
 
     public List<PlayerController> winningPlayers;
 
+    public GameObject cursorPrefab;
 
     [Header("Prefab Refs")]
     public GameObject deathEffectPrefab;
@@ -183,18 +185,11 @@ public class OnlineGameManager : MonoBehaviourPun
         player.transform.position = spawnPoints[x].position;
         RemoveAt(ref localPoints, x);
     }*/
-    public void playerJoin(PlayerInput cursor)
+    public void playerJoin(PlayerInput pi)
     {
         if (!charSelectDone)
         {
-            audio.PlayOneShot(playlist[Random.Range(0, 2)]);
-            cursor.transform.SetParent(canvas.transform);
-            cursor.GetComponentInChildren<Image>().color = settings.player_colors[cursors.Count];
-            cursor.GetComponent<CharCursor>().cursorColor = settings.player_colors[cursors.Count];
-            cursor.GetComponent<CharCursor>().playerIndex = cursors.Count + 1;
-            cursors.Add(cursor.GetComponent<CharCursor>());
-            GameObject playerchcktxt = Instantiate(playerTextPrefab, textContainerParent);
-            playerchcktxt.GetComponent<PlayerCheckText>().owner = cursor.GetComponent<CharCursor>();
+            photonView.RPC("spawnCursor", RpcTarget.AllBuffered, pi);
             /*player.GetComponentInChildren<SpriteRenderer>().sprite = player_skins[players.Count];
             player.GetComponent<Animator>().SetInteger("skinIndex", players.Count);
             players.Add(player.GetComponent<PlayerController>());
@@ -203,6 +198,44 @@ public class OnlineGameManager : MonoBehaviourPun
             RemoveAt(ref localPoints, x);*/
         }
     }
+
+    [PunRPC]
+    public void spawnCursor(int piIndex)
+    {
+        // PlayerInput cursor = PlayerInput.Instantiate(cursorPrefab, playerIndex: pi.playerIndex, controlScheme: pi.currentControlScheme, pairWithDevice: pi.devices[0]);
+        PlayerCursorBuffer[] pcbs = FindObjectsOfType<PlayerCursorBuffer>();
+        PlayerInput pi = new PlayerInput();
+        bool moveOn = false;
+        foreach(PlayerCursorBuffer pcb in pcbs)
+        {
+            if (pcb.index == piIndex)
+            {
+                pi = pcb.GetComponent<PlayerInput>();
+            }
+            else
+            {
+                moveOn = true;
+                return;
+            }
+        }
+        if (moveOn)
+        {
+            return;
+        }
+        GameObject cursor = PhotonNetwork.Instantiate("Cursor", Vector3.zero, Quaternion.identity);
+        PlayerInput cpi = cursor.GetComponent<PlayerInput>();
+        cpi.SwitchCurrentControlScheme(pi.currentControlScheme);
+        audio.PlayOneShot(playlist[Random.Range(0, 2)]);
+        cursor.transform.SetParent(canvas.transform);
+        cursor.GetComponentInChildren<Image>().color = settings.player_colors[cursors.Count];
+        cursor.GetComponent<CharCursor_PN>().cursorColor = settings.player_colors[cursors.Count];
+        cursor.GetComponent<CharCursor_PN>().playerIndex = cursors.Count + 1;
+        cursors.Add(cursor.GetComponent<CharCursor_PN>());
+        GameObject playerchcktxt = Instantiate(playerTextPrefab, textContainerParent);
+        playerchcktxt.GetComponent<PlayerCheckText_PN>().owner = cursor.GetComponent<CharCursor_PN>();
+
+    }
+
     public static void RemoveAt<T>(ref T[] arr, int index)
     {
         for (int a = index; a < arr.Length - 1; a++)
