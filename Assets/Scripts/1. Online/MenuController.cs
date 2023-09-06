@@ -9,12 +9,13 @@ using Photon.Pun.UtilityScripts;
 using System;
 using Photon.Chat.Demo;
 using Photon.Pun.Demo.Cockpit;
-
+using UnityEngine.SceneManagement;
 public class MenuController : MonoBehaviourPunCallbacks, ILobbyCallbacks
 {
     #region Variables
 
     public TextMeshProUGUI toastMsg;
+    public GameObject loadingOBJ;
     [Header("Menu Screens")]
     public GameObject mainUI;
     public GameObject createRoom;
@@ -94,8 +95,13 @@ public class MenuController : MonoBehaviourPunCallbacks, ILobbyCallbacks
         joinRoomBttn.interactable = false;
         nameInput.interactable = false;
         Cursor.lockState = CursorLockMode.None;
-
-        toastMsg.gameObject.SetActive(!PhotonNetwork.IsConnected);
+        
+        if(PhotonNetwork.IsConnected == false)
+        {
+            toastMsg.gameObject.SetActive(true);
+            loadingOBJ.SetActive(true);
+            showMessage("Connecting To Sever");
+        }
     }
     public void setScreen(GameObject screen)
     {
@@ -112,11 +118,25 @@ public class MenuController : MonoBehaviourPunCallbacks, ILobbyCallbacks
     
     }
 
+    public void leaveOnlineMode()
+    {
+        if (PhotonNetwork.IsConnected)
+        {
+            if (PhotonNetwork.InRoom)
+            {
+                PhotonNetwork.LeaveRoom();
+            }
+            PhotonNetwork.LeaveLobby();
+            PhotonNetwork.Disconnect();
+        }
+        SceneManager.LoadScene("Title_Screen");
+    }
 
     public override void OnConnectedToMaster()
     {
         nameInput.interactable = true;
-        showMessage("Connected to server", 2f);
+        loadingOBJ.SetActive(false);
+        showMessage("Connected To Server", 2f);
     }
 
     public void OnCreateRoomBttn_main()
@@ -213,7 +233,7 @@ public class MenuController : MonoBehaviourPunCallbacks, ILobbyCallbacks
     [PunRPC]
     void updateUI()
     {
-        roomHeaderText.text = "<b>" + PhotonNetwork.CurrentRoom.Name + "</b>";
+        roomNameText.text = "<b>" + PhotonNetwork.CurrentRoom.Name + "</b>";
 
         playerBoardText.text = "";
 
@@ -291,8 +311,8 @@ public class MenuController : MonoBehaviourPunCallbacks, ILobbyCallbacks
             GameObject bttn = i >= roomBttnList.Count ? createNewRoomBttn() : roomBttnList[i];
             bttn.SetActive(true);
             bttn.transform.Find("roomName").GetComponent<TextMeshProUGUI>().text = roomInfoList[i].Name;
-            bttn.transform.Find("playerCount").GetComponent <TextMeshProUGUI>().text = roomInfoList[i].PlayerCount.ToString()+" / "+ roomInfoList[i].MaxPlayers.ToString();
-            bttn.transform.Find("playerCountText").GetComponent<TextMeshProUGUI>().text = roomInfoList[i].PlayerCount.ToString() + " / " + roomInfoList[i].MaxPlayers.ToString();
+            bttn.transform.Find("roomCount").GetComponent <TextMeshProUGUI>().text = roomInfoList[i].PlayerCount.ToString()+"/"+ roomInfoList[i].MaxPlayers.ToString();
+            //bttn.transform.Find("playerCountText").GetComponent<TextMeshProUGUI>().text = roomInfoList[i].PlayerCount.ToString() + " / " + roomInfoList[i].MaxPlayers.ToString();
             string rn = roomInfoList[i].Name;
             Button bttncomp = bttn.GetComponent<Button>();
             bttncomp.onClick.RemoveAllListeners();

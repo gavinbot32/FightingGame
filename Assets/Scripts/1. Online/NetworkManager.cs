@@ -14,22 +14,20 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
-
-        PhotonView[] photonViews = FindObjectsOfType<PhotonView>();
-        foreach (PhotonView view in photonViews)
+        
+        if(instance != null && instance != this)
         {
-            if (view.ViewID == 999)
-            {
-                if (view.gameObject != this.gameObject)
-                {
-                    Destroy(this.gameObject);
-                }
-            }
+            Destroy(this.gameObject);
         }
-
-        instance = this;
-
+        else
+        {
+            instance = this;
+        }
         DontDestroyOnLoad(instance);
+        
+
+
+
     }
 
     // Start is called before the first frame update
