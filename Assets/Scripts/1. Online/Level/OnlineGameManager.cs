@@ -20,7 +20,7 @@ public class OnlineGameManager : MonoBehaviourPun
     public Dictionary<string,Sprite> player_badges_dict;
     public Animator[] anims;
     public List<PlayerController> players = new List<PlayerController>();
-    public List<CharCursor_PN> cursors = new List<CharCursor_PN>();
+    public CharCursor_PN[] cursors;
 
     public Transform[] spawnPoints;
     public Transform[] localPoints;
@@ -53,7 +53,7 @@ public class OnlineGameManager : MonoBehaviourPun
     public float curTime;
     public bool charSelectDone;
     public bool readyTime;
-
+    private int playersInGame;
     public PlayerInputManager playerInputManager;
 
 
@@ -71,12 +71,12 @@ public class OnlineGameManager : MonoBehaviourPun
 
     private void Awake()
     {
+        instance = this;
         charSelectDone = false;
         readyTime = false;
         timerObj.SetActive(false);
         maxTime = PlayerPrefs.GetInt("roundTimer",100);
         curTime = maxTime;
-        instance = this;
         audio = GetComponent<AudioSource>();
         player_badges_dict = new Dictionary<string,Sprite>();
         canvas = FindObjectOfType<CharacterSelectionManager>().canvas;
@@ -88,6 +88,8 @@ public class OnlineGameManager : MonoBehaviourPun
     // Start is called before the first frame update
     void Start()
     {
+        cursors = new CharCursor_PN[PhotonNetwork.PlayerList.Length];
+
         timerTxt.text = curTime.ToString();
         winningPlayers = new List<PlayerController>();
         playerInputManager = FindObjectOfType<PlayerInputManager>();
@@ -105,7 +107,34 @@ public class OnlineGameManager : MonoBehaviourPun
 
        
         localPoints = spawnPoints;
+        photonView.RPC("spawnEvent", RpcTarget.AllBuffered);
+    }
+    [PunRPC]
+    private void spawnEvent()
+    {
+        playersInGame++;
+        if (PhotonNetwork.IsMasterClient && playersInGame == PhotonNetwork.PlayerList.Length)
+        {
+            photonView.RPC("spawnCursor", RpcTarget.All);
+        }
         
+
+        
+
+    }
+    [PunRPC]
+    void spawnCursor()
+    {
+        GameObject cursor = PhotonNetwork.Instantiate("Cursor", Vector3.zero, Quaternion.identity);
+        cursor.GetComponent <CharCursor_PN>().photonView.RPC("Initialized", RpcTarget.All, PhotonNetwork.LocalPlayer);
+        cursor.transform.SetParent(canvas.transform);
+        cursor.GetComponent<CharCursor_PN>().playerIndex = cursors.Length + 1;
+        GameObject playerchcktxt = Instantiate(playerTextPrefab, textContainerParent);
+        playerchcktxt.GetComponent<PlayerCheckText_PN>().owner = cursor.GetComponent<CharCursor_PN>();
+        if (photonView.IsMine)
+        {
+            playerchcktxt.GetComponent<PlayerCheckText_PN>().playerName = PhotonNetwork.LocalPlayer.NickName;
+        }
     }
 
     private void FixedUpdate()
@@ -177,7 +206,7 @@ public class OnlineGameManager : MonoBehaviourPun
     }   
     /*public void playerJoin(PlayerInput player)
     {
-       // player.GetComponentInChildren<SpriteRenderer>().color = player_colors[players.Count];
+        player.GetComponentInChildren<SpriteRenderer>().color = player_colors[players.Count];
         player.GetComponentInChildren<SpriteRenderer>().sprite = player_skins[players.Count];
         player.GetComponent<Animator>().SetInteger("skinIndex", players.Count);
         players.Add(player.GetComponent<PlayerController>());
@@ -185,21 +214,15 @@ public class OnlineGameManager : MonoBehaviourPun
         player.transform.position = spawnPoints[x].position;
         RemoveAt(ref localPoints, x);
     }*/
-    public void playerJoin(PlayerInput pi)
+    /*public void playerJoin(PlayerInput pi)
     {
         if (!charSelectDone)
         {
             photonView.RPC("spawnCursor", RpcTarget.AllBuffered, pi);
-            /*player.GetComponentInChildren<SpriteRenderer>().sprite = player_skins[players.Count];
-            player.GetComponent<Animator>().SetInteger("skinIndex", players.Count);
-            players.Add(player.GetComponent<PlayerController>());
-            int x = UnityEngine.Random.Range(0, localPoints.Length);
-            player.transform.position = spawnPoints[x].position;
-            RemoveAt(ref localPoints, x);*/
         }
-    }
+    }*/
 
-    [PunRPC]
+/*    [PunRPC]
     public void spawnCursor(int piIndex)
     {
         // PlayerInput cursor = PlayerInput.Instantiate(cursorPrefab, playerIndex: pi.playerIndex, controlScheme: pi.currentControlScheme, pairWithDevice: pi.devices[0]);
@@ -234,7 +257,7 @@ public class OnlineGameManager : MonoBehaviourPun
         GameObject playerchcktxt = Instantiate(playerTextPrefab, textContainerParent);
         playerchcktxt.GetComponent<PlayerCheckText_PN>().owner = cursor.GetComponent<CharCursor_PN>();
 
-    }
+    }*/
 
     public static void RemoveAt<T>(ref T[] arr, int index)
     {

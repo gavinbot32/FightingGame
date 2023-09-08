@@ -131,8 +131,8 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CharCursor, Assembly-CSharp
+      - m_Target: {fileID: 5931846041357542660}
+        m_TargetAssemblyTypeName: CharCursor_PN, Assembly-CSharp
         m_MethodName: onUpInput
         m_Mode: 0
         m_Arguments:
@@ -147,8 +147,8 @@ MonoBehaviour:
     m_ActionName: menuControls/Up[/Keyboard/upArrow,/XInputControllerWindows/dpad/up]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CharCursor, Assembly-CSharp
+      - m_Target: {fileID: 5931846041357542660}
+        m_TargetAssemblyTypeName: CharCursor_PN, Assembly-CSharp
         m_MethodName: onDownInput
         m_Mode: 0
         m_Arguments:
@@ -163,7 +163,7 @@ MonoBehaviour:
     m_ActionName: menuControls/Down[/Keyboard/downArrow,/XInputControllerWindows/dpad/down]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5931846041357542660}
         m_TargetAssemblyTypeName: CharCursor, Assembly-CSharp
         m_MethodName: onLeftInput
         m_Mode: 0
@@ -179,7 +179,7 @@ MonoBehaviour:
     m_ActionName: menuControls/Left[/Keyboard/downArrow,/XInputControllerWindows/dpad/left]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5931846041357542660}
         m_TargetAssemblyTypeName: CharCursor, Assembly-CSharp
         m_MethodName: onRightInput
         m_Mode: 0
@@ -195,7 +195,7 @@ MonoBehaviour:
     m_ActionName: menuControls/Right[/Keyboard/rightArrow,/XInputControllerWindows/dpad/right]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5931846041357542660}
         m_TargetAssemblyTypeName: CharCursor, Assembly-CSharp
         m_MethodName: onSelectInput
         m_Mode: 0
@@ -210,7 +210,7 @@ MonoBehaviour:
     m_ActionId: 556c34f5-0695-4fb8-9aab-655b683be4dc
     m_ActionName: menuControls/Select[/Keyboard/enter,/XInputControllerWindows/buttonSouth]
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: gamePad
   m_DefaultActionMap: menuControls
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}

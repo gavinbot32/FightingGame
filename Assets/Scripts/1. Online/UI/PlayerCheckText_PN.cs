@@ -11,6 +11,7 @@ public class PlayerCheckText_PN : MonoBehaviour
     public Image checkBox;
     public Image checkMark;
     public TextMeshProUGUI playerText;
+    public string playerName;
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +20,7 @@ public class PlayerCheckText_PN : MonoBehaviour
         checkMark.color = owner.cursorColor;
         playerText.color = owner.cursorColor;
 
-        playerText.text = ("Player " + owner.playerIndex.ToString());
+        playerText.text = (playerName);
         checkMark.gameObject.SetActive(false);
 
     }

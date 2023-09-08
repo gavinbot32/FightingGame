@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.UI;
+
 public class CharCursor_PN : MonoBehaviourPun
 {
     public PlayerSettings settings;
@@ -15,6 +17,7 @@ public class CharCursor_PN : MonoBehaviourPun
     public int playerIndex;
     public bool selectDone;
     OnlineGameManager manager;
+    private Player photonPlayer;
 
     public PlayerContainerUI playerContainerPrefab;
     public PlayerControlUI playerControlPrefab;
@@ -24,6 +27,7 @@ public class CharCursor_PN : MonoBehaviourPun
     public int cIndex = 0;
     public int lifetime;
     public int skinIndex;
+    private int punId;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +41,13 @@ public class CharCursor_PN : MonoBehaviourPun
     // Update is called once per frame
     void Update()
     {
+
+        if (!photonView.IsMine)
+        {
+            GetComponent<PlayerInput>().enabled = false;
+            return;
+        }
+
         if (lifetime < 30)
         {
             lifetime++;
@@ -45,7 +56,20 @@ public class CharCursor_PN : MonoBehaviourPun
         transform.position = selected.position;
 
     }
+    [PunRPC]
+    public void Initialized(Player player)
+    {
+        punId = player.ActorNumber;
+        photonPlayer = player;
+        OnlineGameManager.instance.cursors[punId - 1] = this;
 
+        if (!photonView.IsMine)
+        {
+            GetComponent<PlayerInput>().enabled = false;
+        }
+       gameObject.GetComponentInChildren<Image>().color = settings.player_colors[playerIndex];
+       GetComponent<CharCursor_PN>().cursorColor = settings.player_colors[playerIndex];
+    }
     private void navUp()
     {
         if (lifetime >= 30)
@@ -53,7 +77,6 @@ public class CharCursor_PN : MonoBehaviourPun
             rIndex--;
             checkIndex();
         }
-        checkOverlap();
 
     }
     private void navDown()
@@ -63,7 +86,7 @@ public class CharCursor_PN : MonoBehaviourPun
             rIndex++;
             checkIndex();
         }
-        checkOverlap();
+        
 
     }
     private void navLeft()
@@ -73,7 +96,6 @@ public class CharCursor_PN : MonoBehaviourPun
             cIndex--;
             checkIndex();
         }
-        checkOverlap();
 
     }
     private void navRight()
@@ -83,7 +105,6 @@ public class CharCursor_PN : MonoBehaviourPun
             cIndex++;
             checkIndex();
         }
-        checkOverlap();
     }
     
 
@@ -122,7 +143,7 @@ public class CharCursor_PN : MonoBehaviourPun
             {
                 skinOpen = false;
             }
-            if (skinOpen && manager.cursors.Count > 1)
+            if (skinOpen && manager.cursors.Length > 1)
             {
                 manager.audio.PlayOneShot(manager.playlist[Random.Range(2, 3)]);
                 selectDone = true;
@@ -137,7 +158,7 @@ public class CharCursor_PN : MonoBehaviourPun
                         doneCount++;
                     }
                 }
-                if (doneCount == manager.cursors.Count)
+                if (doneCount == manager.cursors.Length)
                 {
                     foreach (CharCursor_PN i in manager.cursors)
                     {
@@ -149,7 +170,7 @@ public class CharCursor_PN : MonoBehaviourPun
                     manager.playerInputManager.gameObject.SetActive(false);
 
                 }
-            }else if(manager.cursors.Count <= 1) {
+            }else if(manager.cursors.Length <= 1) {
 
                 manager.errorDialog("Must Have Atleast 2 Players!", 2f);
 
@@ -224,7 +245,10 @@ public class CharCursor_PN : MonoBehaviourPun
         {
             if (!navLock)
             {
-                navUp();
+                if (photonView.IsMine)
+                {
+                    navUp();
+                }
 
             }
         }
@@ -235,7 +259,11 @@ public class CharCursor_PN : MonoBehaviourPun
         {
             if (!navLock)
             {
-                navDown();
+
+                if (photonView.IsMine)
+                {
+                    navDown();
+                }
             }
         }
     }
@@ -245,7 +273,10 @@ public class CharCursor_PN : MonoBehaviourPun
         {
             if (!navLock)
             {
-                navLeft();
+                if (photonView.IsMine)
+                {
+                    navLeft();
+                }
             }
         }
     }
@@ -255,7 +286,10 @@ public class CharCursor_PN : MonoBehaviourPun
         {
             if (!navLock)
             {
-                navRight();
+                if (photonView.IsMine)
+                {
+                    navRight();
+                }
             }
         }
     }
@@ -263,7 +297,10 @@ public class CharCursor_PN : MonoBehaviourPun
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            charSelect();
+            if (photonView.IsMine)
+            {
+                charSelect();
+            }
 
         }
     }
