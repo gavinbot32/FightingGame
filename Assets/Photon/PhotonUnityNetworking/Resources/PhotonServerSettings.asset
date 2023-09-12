@@ -45,6 +45,8 @@ MonoBehaviour:
   - spawnEvent
   - Initialized
   - spawnPlayer
+  - setCursorParent
+  - cursorUpdate
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

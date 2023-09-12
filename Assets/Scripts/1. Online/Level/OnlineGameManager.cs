@@ -22,6 +22,8 @@ public class OnlineGameManager : MonoBehaviourPun
     public List<PlayerController> players = new List<PlayerController>();
     public CharCursor_PN[] cursors;
 
+    private CharCursor_PN curCursor;
+
     public Transform[] spawnPoints;
     public Transform[] localPoints;
 
@@ -55,6 +57,7 @@ public class OnlineGameManager : MonoBehaviourPun
     public bool readyTime;
     private int playersInGame;
     public PlayerInputManager playerInputManager;
+    private CharSelect_PN charSelect;
 
 
     [Header("UI Components")]
@@ -82,6 +85,7 @@ public class OnlineGameManager : MonoBehaviourPun
         canvas = FindObjectOfType<CharacterSelectionManager>().canvas;
         rowCount = canvas.GetComponent<CharacterSelectionManager>().rowCount;
         colCount = canvas.GetComponent<CharacterSelectionManager>().colCount;
+        charSelect = FindObjectOfType<CharSelect_PN>();
     }
 
 
@@ -126,17 +130,16 @@ public class OnlineGameManager : MonoBehaviourPun
     void spawnCursor()
     {
         GameObject cursor = PhotonNetwork.Instantiate("Cursor", Vector3.zero, Quaternion.identity);
-        cursor.GetComponent <CharCursor_PN>().photonView.RPC("Initialized", RpcTarget.All, PhotonNetwork.LocalPlayer);
-        cursor.transform.SetParent(canvas.transform);
+        cursor.GetComponent<CharCursor_PN>().photonView.RPC("Initialized", RpcTarget.All, PhotonNetwork.LocalPlayer);
         cursor.GetComponent<CharCursor_PN>().playerIndex = cursors.Length + 1;
-        GameObject playerchcktxt = Instantiate(playerTextPrefab, textContainerParent);
-        playerchcktxt.GetComponent<PlayerCheckText_PN>().owner = cursor.GetComponent<CharCursor_PN>();
-        if (photonView.IsMine)
-        {
-            playerchcktxt.GetComponent<PlayerCheckText_PN>().playerName = PhotonNetwork.LocalPlayer.NickName;
-        }
-    }
+        charSelect.cursor_PNs.Add(cursor.GetComponent<CharCursor_PN>());
+        curCursor = cursor.GetComponent<CharCursor_PN>();
+        print("Before Cursor Update");
 
+        canvas.GetComponent<CharSelect_PN>().photonView.RPC("cursorUpdate", RpcTarget.All);
+        print("After Cursor Update");
+
+    }
     private void FixedUpdate()
     {
         if (readyTime)
