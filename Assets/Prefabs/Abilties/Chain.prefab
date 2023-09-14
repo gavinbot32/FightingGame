@@ -4782,7 +4782,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2072694629
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
@@ -5000,7 +5000,7 @@ MonoBehaviour:
   badge: {fileID: 21300000, guid: 5d2ba5bfabd3f184f9cee80878aa67f5, type: 3}
   description: <u><b>Grappling Hook</b></u><br> Sends a grappling hook pulling however
     it hits towards you.
-  damage: 4
+  damage: 15
   owner: {fileID: 0}
   spawnOffset: {x: 0.6, y: 0}
   lifetime: 0.5
@@ -5020,6 +5020,8 @@ MonoBehaviour:
   hooked: 0
   target: {fileID: 0}
   targetPos: {x: 0, y: 0, z: 0}
+  hookedJumps: 1
+  hookedJumpForce: 5
 --- !u!212 &1937727039771569565
 SpriteRenderer:
   m_ObjectHideFlags: 0

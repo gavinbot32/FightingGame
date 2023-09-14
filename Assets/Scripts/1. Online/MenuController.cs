@@ -43,6 +43,7 @@ public class MenuController : MonoBehaviourPunCallbacks, ILobbyCallbacks
     public TextMeshProUGUI playerHeaderText;
     public Image playerBoardBG;
     public TextMeshProUGUI playerBoardText;
+    public Dropdown inputSelectionDP;
     
     [Header("Right Column")]
     public Image roomHeaderBg;
@@ -129,6 +130,12 @@ public class MenuController : MonoBehaviourPunCallbacks, ILobbyCallbacks
             PhotonNetwork.LeaveLobby();
             PhotonNetwork.Disconnect();
         }
+
+        if(GameSettingsManager.instance != null)
+        {
+            Destroy(GameSettingsManager.instance);
+        }
+
         SceneManager.LoadScene("Title_Screen");
     }
 
@@ -249,6 +256,11 @@ public class MenuController : MonoBehaviourPunCallbacks, ILobbyCallbacks
 
         //selected_level = mapGrid selection
 
+    }
+
+    void onInputSelectionChange()
+    {
+        GameSettingsManager.instance.inputIndex = inputSelectionDP.value;
     }
 
     public void onCreateRoomBttn_rsl()

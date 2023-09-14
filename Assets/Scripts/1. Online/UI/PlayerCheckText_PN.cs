@@ -35,15 +35,15 @@ public class PlayerCheckText_PN : MonoBehaviour
         checkMark.gameObject.SetActive(owner.selectDone);
 
     }
-    public void initialize(int index)
+    public void initialize(CharCursor_PN cursor)
     {
-        index = index;
-        owner = charSelect.cursor_PNs[index];
+        owner = cursor;
         print(owner);
         checkBox.color = owner.cursorColor;
         checkMark.color = owner.cursorColor;
         playerText.color = owner.cursorColor;
         print("got this far");
+        playerName = owner.photonView.Owner.NickName;
         playerText.text = (playerName);
 
     }

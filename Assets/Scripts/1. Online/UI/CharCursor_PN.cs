@@ -61,14 +61,18 @@ public class CharCursor_PN : MonoBehaviourPun
     {
         punId = player.ActorNumber;
         photonPlayer = player;
+        cursorColor = settings.player_colors[OnlineGameManager.instance.charSelect.cursor_PNs.Count];
         OnlineGameManager.instance.cursors[punId - 1] = this;
 
         if (!photonView.IsMine)
         {
             GetComponent<PlayerInput>().enabled = false;
         }
-       gameObject.GetComponentInChildren<Image>().color = settings.player_colors[playerIndex];
-       GetComponent<CharCursor_PN>().cursorColor = settings.player_colors[playerIndex];
+       gameObject.GetComponentInChildren<Image>().color = cursorColor;
+       transform.SetParent(OnlineGameManager.instance.charSelect.transform);
+       GameObject playerchcktxt = Instantiate(OnlineGameManager.instance.playerTextPrefab, OnlineGameManager.instance.textContainerParent);
+       print("Before init");
+       playerchcktxt.GetComponent<PlayerCheckText_PN>().initialize(this);
     }
     private void navUp()
     {

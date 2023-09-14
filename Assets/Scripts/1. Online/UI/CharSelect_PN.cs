@@ -20,26 +20,25 @@ public class CharSelect_PN : MonoBehaviourPun
     {
         
     }
-    [PunRPC]
-    void cursorUpdate()
+
+
+    public void cursorUpdate()
     {
 
         foreach(CharCursor_PN tempCursor in cursor_PNs)
         {
-            
+            print("Before setting parent"+tempCursor);
             tempCursor.transform.SetParent(this.transform);
-            GameObject playerchcktxt = PhotonNetwork.Instantiate("playerCheckText", Vector3.zero, Quaternion.identity);
-            playerchcktxt.transform.SetParent(textContainerParent);
-            print("Before init");
-            playerchcktxt.GetComponent<PlayerCheckText_PN>().initialize(cursor_PNs.Count - 1);
+            print("Before Check Text Instansiate " + tempCursor);
+            
             print("After init");
-
             /*if (photonView.IsMine)
             {
                 playerchcktxt.GetComponent<PlayerCheckText_PN>().playerName = PhotonNetwork.LocalPlayer.NickName;
             }*/
-            
+
         }
+       
 
         /*
                 CharCursor_PN[] tempCursors = FindObjectsOfType<CharCursor_PN>();

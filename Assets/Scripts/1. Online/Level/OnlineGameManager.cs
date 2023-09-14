@@ -57,7 +57,7 @@ public class OnlineGameManager : MonoBehaviourPun
     public bool readyTime;
     private int playersInGame;
     public PlayerInputManager playerInputManager;
-    private CharSelect_PN charSelect;
+    public CharSelect_PN charSelect;
 
 
     [Header("UI Components")]
@@ -112,6 +112,7 @@ public class OnlineGameManager : MonoBehaviourPun
        
         localPoints = spawnPoints;
         photonView.RPC("spawnEvent", RpcTarget.AllBuffered);
+        
     }
     [PunRPC]
     private void spawnEvent()
@@ -130,14 +131,12 @@ public class OnlineGameManager : MonoBehaviourPun
     void spawnCursor()
     {
         GameObject cursor = PhotonNetwork.Instantiate("Cursor", Vector3.zero, Quaternion.identity);
-        cursor.GetComponent<CharCursor_PN>().photonView.RPC("Initialized", RpcTarget.All, PhotonNetwork.LocalPlayer);
         cursor.GetComponent<CharCursor_PN>().playerIndex = cursors.Length + 1;
+        cursor.GetComponent<CharCursor_PN>().photonView.RPC("Initialized", RpcTarget.All, PhotonNetwork.LocalPlayer);
+
         charSelect.cursor_PNs.Add(cursor.GetComponent<CharCursor_PN>());
         curCursor = cursor.GetComponent<CharCursor_PN>();
-        print("Before Cursor Update");
 
-        canvas.GetComponent<CharSelect_PN>().photonView.RPC("cursorUpdate", RpcTarget.All);
-        print("After Cursor Update");
 
     }
     private void FixedUpdate()

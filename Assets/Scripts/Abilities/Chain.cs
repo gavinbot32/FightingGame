@@ -11,6 +11,12 @@ public class Chain : Ability
     public GameObject target;
     public Vector3 targetPos;
     Vector3 curPos;
+
+    [SerializeField]
+    private int hookedJumps;
+    [SerializeField]
+    private float hookedJumpForce;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,7 +59,9 @@ public class Chain : Ability
             target.transform.position = transform.position;
             PlayerController tarCon = target.GetComponent<PlayerController>();
             tarCon.moveSpeed = 0;
-            tarCon.jumpForce = 0;
+            tarCon.curJumps = hookedJumps;
+            tarCon.jumpForce = hookedJumpForce;
+            owner.curJumps = owner.maxJumps;
             target.GetComponent<Rigidbody2D>().gravityScale = 0;
             target.GetComponent<Rigidbody2D>().velocity = new Vector2(target.GetComponent<Rigidbody2D>().velocity.x, 0);
 
@@ -74,11 +82,11 @@ public class Chain : Ability
 
     private void kill()
     {
-        owner.resetMods();
+        owner.resetMods(true);
         if (target)
         {
             PlayerController tarCon = target.GetComponent<PlayerController>();
-            tarCon.resetMods();
+            tarCon.resetMods(true);
             //target.GetComponent<Collider2D>().enabled = true; 
         }
     }
