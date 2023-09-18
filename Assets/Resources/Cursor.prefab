@@ -94,7 +94,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: d20a5d732f8ba7c47bf8582f7ac74525, type: 2}
   selected: {fileID: 0}
-  input: {fileID: 0}
+  input: {fileID: 1495210120838180624}
   cursorColor: {r: 0, g: 0, b: 0, a: 0}
   playerIndex: 0
   selectDone: 0

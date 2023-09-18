@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
+using System;
 
 public class CharCursor_PN : MonoBehaviourPun
 {
@@ -18,7 +19,6 @@ public class CharCursor_PN : MonoBehaviourPun
     public bool selectDone;
     OnlineGameManager manager;
     private Player photonPlayer;
-
     public PlayerContainerUI playerContainerPrefab;
     public PlayerControlUI playerControlPrefab;
 
@@ -59,6 +59,20 @@ public class CharCursor_PN : MonoBehaviourPun
     [PunRPC]
     public void Initialized(Player player)
     {
+
+        if (GameSettingsManager.instance != null)
+        {
+            string inputString = GameSettingsManager.instance.inputList[GameSettingsManager.instance.inputIndex].ToString();
+        
+            if (inputString == "keyboard") {
+                input.SwitchCurrentControlScheme("keyboard", Keyboard.current, Mouse.current);
+            }
+            else
+            {
+                input.SwitchCurrentControlScheme("gamePad", Gamepad.current);
+            }
+        }
+
         punId = player.ActorNumber;
         photonPlayer = player;
         cursorColor = settings.player_colors[OnlineGameManager.instance.charSelect.cursor_PNs.Count];
@@ -149,7 +163,7 @@ public class CharCursor_PN : MonoBehaviourPun
             }
             if (skinOpen && manager.cursors.Length > 1)
             {
-                manager.audio.PlayOneShot(manager.playlist[Random.Range(2, 3)]);
+                manager.audio.PlayOneShot(manager.playlist[UnityEngine.Random.Range(2, 3)]);
                 selectDone = true;
                 navLock = true;
                 skinIndex = rows[rIndex, cIndex].index;

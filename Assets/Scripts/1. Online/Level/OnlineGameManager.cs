@@ -130,6 +130,7 @@ public class OnlineGameManager : MonoBehaviourPun
     [PunRPC]
     void spawnCursor()
     {
+  
         GameObject cursor = PhotonNetwork.Instantiate("Cursor", Vector3.zero, Quaternion.identity);
         cursor.GetComponent<CharCursor_PN>().playerIndex = cursors.Length + 1;
         cursor.GetComponent<CharCursor_PN>().photonView.RPC("Initialized", RpcTarget.All, PhotonNetwork.LocalPlayer);

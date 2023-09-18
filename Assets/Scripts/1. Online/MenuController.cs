@@ -10,6 +10,8 @@ using System;
 using Photon.Chat.Demo;
 using Photon.Pun.Demo.Cockpit;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
+
 public class MenuController : MonoBehaviourPunCallbacks, ILobbyCallbacks
 {
     #region Variables
@@ -43,7 +45,7 @@ public class MenuController : MonoBehaviourPunCallbacks, ILobbyCallbacks
     public TextMeshProUGUI playerHeaderText;
     public Image playerBoardBG;
     public TextMeshProUGUI playerBoardText;
-    public Dropdown inputSelectionDP;
+    public TMP_Dropdown inputSelectionDP;
     
     [Header("Right Column")]
     public Image roomHeaderBg;
@@ -258,7 +260,7 @@ public class MenuController : MonoBehaviourPunCallbacks, ILobbyCallbacks
 
     }
 
-    void onInputSelectionChange()
+    public void onInputSelectionChange()
     {
         GameSettingsManager.instance.inputIndex = inputSelectionDP.value;
     }
@@ -362,6 +364,31 @@ public class MenuController : MonoBehaviourPunCallbacks, ILobbyCallbacks
     // Update is called once per frame
     void Update()
     {
-        
+
+
+
+
+        Toggle[] toggles = inputSelectionDP.GetComponentsInChildren<Toggle>();
+        for (int i = 0; i<toggles.Length; i++)
+        {
+            if(i == 1)
+            {
+                bool connected = false;
+                if(Keyboard.current != null) { connected = true;} else { connected = false; }
+                toggles[i].interactable = connected;
+               
+            }
+            else
+            {
+                bool connected = false;
+                if (Gamepad.current != null) { connected = true; } else { connected = false; }
+                toggles[i].interactable = connected;
+                if (!connected)
+                {
+                    inputSelectionDP.value = 1;
+                }
+            }
+        }
+       
     }
 }
