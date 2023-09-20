@@ -33,7 +33,7 @@ public class CharCursor_PN : MonoBehaviourPun
     {
         lifetime = 0;
         selectDone = false;
-        manager = FindObjectOfType<OnlineGameManager>();
+        manager = OnlineGameManager.instance;
         input = GetComponent<PlayerInput>();
         rows = manager.rows;
     }
@@ -141,7 +141,6 @@ public class CharCursor_PN : MonoBehaviourPun
         }
     }
 
-
     private void charSelect()
     {
         if (lifetime >= 30)
@@ -164,28 +163,17 @@ public class CharCursor_PN : MonoBehaviourPun
             if (skinOpen && manager.cursors.Length > 1)
             {
                 manager.audio.PlayOneShot(manager.playlist[UnityEngine.Random.Range(2, 3)]);
-                selectDone = true;
-                navLock = true;
-                skinIndex = rows[rIndex, cIndex].index;
+                
+                
                 print(skinIndex);
-                int doneCount = 0;
-                foreach (CharCursor_PN i in manager.cursors)
+                photonView.RPC("lockCursor",RpcTarget.All,rows[rIndex, cIndex].index);
+                if (manager.doneCount == manager.cursors.Length)
                 {
-                    if (i.selectDone)
-                    {
-                        doneCount++;
-                    }
-                }
-                if (doneCount == manager.cursors.Length)
-                {
-                    foreach (CharCursor_PN i in manager.cursors)
+                    manager.spawnPlayers();
+                /*    foreach (CharCursor_PN i in manager.cursors)
                     {
                         i.spawnCharacter();
-                    }
-                    manager.readyTime = true;
-                    manager.canvas.SetActive(false);
-                    manager.charSelectDone = true;
-                    manager.playerInputManager.gameObject.SetActive(false);
+                    }*/
 
                 }
             }else if(manager.cursors.Length <= 1) {
@@ -197,43 +185,17 @@ public class CharCursor_PN : MonoBehaviourPun
 
     }
 
-     
-    public void spawnCharacter()
+    [PunRPC]
+    public void lockCursor(int sIndex)
     {
-        //Spawn PLayer
-        PlayerInput p = PlayerInput.Instantiate(manager.playerPrefab, playerIndex: input.playerIndex, controlScheme: input.currentControlScheme, pairWithDevice: input.devices[0]);
-        p.transform.SetParent(null);
-        //Setting Skin
-        p.GetComponentInChildren<SpriteRenderer>().sprite = settings.player_skins[skinIndex];
-        p.GetComponent<Animator>().SetInteger("skinIndex", skinIndex);
-        p.GetComponent<PlayerController>().skinIndex = skinIndex;
+        selectDone = true;
+        navLock = true;
+        skinIndex = sIndex;
+        manager.doneCount++;
 
-        //Create ui container
-        PlayerContainerUI containerUI = Instantiate(playerContainerPrefab, manager.playerContainerParent).GetComponent<PlayerContainerUI>();
-        containerUI.intialized(Color.green, manager.player_badges_dict[settings.player_strings[skinIndex]]);
-        p.GetComponent<PlayerController>().setUIContainer(containerUI);
-
-
-        //Create Control Unit
-        bool keyboard = false;
-        PlayerControlUI controlUI = Instantiate(playerControlPrefab, manager.playerControlsParent).GetComponent<PlayerControlUI>();
-        if(p.currentControlScheme == "keyboard" || p.currentControlScheme == "Keyboard")
-        {
-            keyboard = true;
-        }
-        PlayerController player = p.GetComponent<PlayerController>();
-        Ability ability = player.attackPrefab.GetComponent<Ability>();
-        controlUI.intialized(ability.badge, keyboard,ability.description);
-        p.GetComponent<PlayerController>().setUIControls(controlUI);
-
-        //Add Player to list
-        manager.players.Add(p.GetComponent<PlayerController>());
-        //change position
-        int x = UnityEngine.Random.Range(0, manager.localPoints.Length);
-        p.transform.position = manager.spawnPoints[x].position;
-        manager.localPointChange(x);
-       
     }
+
+  
 
     private void checkIndex()
     {

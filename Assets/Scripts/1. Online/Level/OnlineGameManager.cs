@@ -43,8 +43,7 @@ public class OnlineGameManager : MonoBehaviourPun
     public int colCount;
     public GameObject canvas;
     public CharacterCell[,] rows;
-    
-
+    public int doneCount;
     [Header("Compnents")]
     public AudioSource audio;
     public AudioClip[] playlist;
@@ -138,7 +137,6 @@ public class OnlineGameManager : MonoBehaviourPun
         charSelect.cursor_PNs.Add(cursor.GetComponent<CharCursor_PN>());
         curCursor = cursor.GetComponent<CharCursor_PN>();
 
-
     }
     private void FixedUpdate()
     {
@@ -154,6 +152,35 @@ public class OnlineGameManager : MonoBehaviourPun
         debugCheck();
     }
     // Update is called once per frame
+    
+    [PunRPC]
+    public void readyGame()
+    {
+        readyTime = true;
+        canvas.SetActive(false);
+        charSelectDone = true;
+        playerInputManager.gameObject.SetActive(false);
+    }
+
+    public void spawnPlayers()
+    {
+        foreach(CharCursor_PN cursor in cursors)
+        {
+            photonView.RPC("spawnCharacter", RpcTarget.All, cursor.skinIndex);
+        }
+        photonView.RPC("readyGame", RpcTarget.All);
+    }
+
+    [PunRPC]
+    public void spawnCharacter(int skinIndex)
+    {
+        int x = UnityEngine.Random.Range(0, localPoints.Length);
+        GameObject player = PhotonNetwork.Instantiate("Player", spawnPoints[x].position, Quaternion.identity);
+        player.GetComponent<PlayerController_PN>().skinIndex = skinIndex;
+        this.players.Add(player.GetComponent<PlayerController>());
+
+    }
+
     void Update()
     {
         if (curTime <= 0) {

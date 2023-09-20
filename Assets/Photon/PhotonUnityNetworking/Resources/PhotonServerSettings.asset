@@ -47,6 +47,9 @@ MonoBehaviour:
   - spawnPlayer
   - setCursorParent
   - cursorUpdate
+  - lockCursor
+  - readyGame
+  - spawnCharacter
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
