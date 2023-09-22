@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Photon.Pun;
 using Photon.Realtime;
+
 public class PlayerController_PN : MonoBehaviourPun
 {
     public OnlineGameManager manager;
@@ -55,6 +56,7 @@ public class PlayerController_PN : MonoBehaviourPun
     public GameObject deathParticle;
     public PlayerInput input;
     public GameObject spriteObj;
+    public Player photonPlayer;
 
     [Header("UI Elements")]
     public GameObject playerContainerPrefab;
@@ -89,8 +91,44 @@ public class PlayerController_PN : MonoBehaviourPun
         }
     }
 
-    public void initialize()
+    [PunRPC]
+    public void initialize(Player Pplayer)
     {
+        photonPlayer = Pplayer;
+        foreach (CharCursor_PN cursor in manager.cursors)
+        {
+            if (cursor.photonPlayer == photonPlayer)
+            {
+                skinIndex = cursor.skinIndex;
+
+            }
+        }
+        manager.players.Add(this);
+        //Setting Skin
+        GetComponentInChildren<SpriteRenderer>().sprite = settings.player_skins[skinIndex];
+        GetComponent<Animator>().SetInteger("skinIndex", skinIndex);
+        //Create ui container
+        PlayerContainerUI containerUI = Instantiate(playerContainerPrefab, manager.playerContainerParent).GetComponent<PlayerContainerUI>();
+        containerUI.intialized(Color.green, manager.player_badges_dict[settings.player_strings[skinIndex]]);
+        setUIContainer(containerUI);
+        //Create Control Unit
+        bool keyboard = false;
+        PlayerControlUI controlUI = Instantiate(playerControlPrefab, manager.playerControlsParent).GetComponent<PlayerControlUI>();
+        if (input.currentControlScheme == "keyboard" || input.currentControlScheme == "Keyboard")
+        {
+            keyboard = true;
+        }
+        Ability ability = attackPrefab.GetComponent<Ability>();
+        controlUI.intialized(ability.badge, keyboard, ability.description);
+        setUIControls(controlUI);
+        uiContainer.updateHealthBar(curHp, maxHp);
+
+        if (!photonView.IsMine)
+        {
+            GetComponent<PlayerInput>().enabled = false;
+            return;
+        }
+
         if (GameSettingsManager.instance != null)
         {
             string inputString = GameSettingsManager.instance.inputList[GameSettingsManager.instance.inputIndex].ToString();
@@ -104,24 +142,6 @@ public class PlayerController_PN : MonoBehaviourPun
             }
         }
 
-
-        //Setting Skin
-        GetComponentInChildren<SpriteRenderer>().sprite = settings.player_skins[skinIndex];
-        GetComponent<Animator>().SetInteger("skinIndex", skinIndex);
-        //Create ui container
-        PlayerContainerUI containerUI = Instantiate(playerContainerPrefab, manager.playerContainerParent).GetComponent<PlayerContainerUI>();
-        containerUI.intialized(Color.green, manager.player_badges_dict[settings.player_strings[skinIndex]]);
-        GetComponent<PlayerController>().setUIContainer(containerUI);
-        //Create Control Unit
-        bool keyboard = false;
-        PlayerControlUI controlUI = Instantiate(playerControlPrefab, manager.playerControlsParent).GetComponent<PlayerControlUI>();
-        if (input.currentControlScheme == "keyboard" || input.currentControlScheme == "Keyboard")
-        {
-            keyboard = true;
-        }
-        Ability ability = attackPrefab.GetComponent<Ability>();
-        controlUI.intialized(ability.badge, keyboard, ability.description);
-        GetComponent<PlayerController>().setUIControls(controlUI);
     }
 
     // Start is called before the first frame update
@@ -135,16 +155,20 @@ public class PlayerController_PN : MonoBehaviourPun
         curJumps = maxJumps;
         died = false;
         score = 0;
-        uiContainer.updateHealthBar(curHp, maxHp);
         canMelee = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!photonView.IsMine)
+        {
+            GetComponent<PlayerInput>().enabled = false;
+            return;
+        }
 
         deathCheck();
-        if (attackPrefab != null)
+        if (attackPrefab != null && uiContainer != null)
         {
             uiContainer.updateChargeBar(Time.time - lastAttackTime, attackPrefab.GetComponent<Ability>().rof);
         }

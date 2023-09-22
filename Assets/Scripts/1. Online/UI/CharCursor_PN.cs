@@ -18,7 +18,7 @@ public class CharCursor_PN : MonoBehaviourPun
     public int playerIndex;
     public bool selectDone;
     OnlineGameManager manager;
-    private Player photonPlayer;
+    public Player photonPlayer;
     public PlayerContainerUI playerContainerPrefab;
     public PlayerControlUI playerControlPrefab;
 

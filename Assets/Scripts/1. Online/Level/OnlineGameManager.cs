@@ -19,7 +19,7 @@ public class OnlineGameManager : MonoBehaviourPun
     [Header("Player Refs")]
     public Dictionary<string,Sprite> player_badges_dict;
     public Animator[] anims;
-    public List<PlayerController> players = new List<PlayerController>();
+    public List<PlayerController_PN> players = new List<PlayerController_PN>();
     public CharCursor_PN[] cursors;
 
     private CharCursor_PN curCursor;
@@ -27,7 +27,7 @@ public class OnlineGameManager : MonoBehaviourPun
     public Transform[] spawnPoints;
     public Transform[] localPoints;
 
-    public List<PlayerController> winningPlayers;
+    public List<PlayerController_PN> winningPlayers;
 
     public GameObject cursorPrefab;
 
@@ -57,7 +57,7 @@ public class OnlineGameManager : MonoBehaviourPun
     private int playersInGame;
     public PlayerInputManager playerInputManager;
     public CharSelect_PN charSelect;
-
+    public bool playersSpawned;
 
     [Header("UI Components")]
     public Transform playerContainerParent;
@@ -94,7 +94,7 @@ public class OnlineGameManager : MonoBehaviourPun
         cursors = new CharCursor_PN[PhotonNetwork.PlayerList.Length];
 
         timerTxt.text = curTime.ToString();
-        winningPlayers = new List<PlayerController>();
+        winningPlayers = new List<PlayerController_PN>();
         playerInputManager = FindObjectOfType<PlayerInputManager>();
         playerInputManager.gameObject.SetActive(true);
         for (int i = 0; i < settings.player_badges.Length; i++)
@@ -164,11 +164,17 @@ public class OnlineGameManager : MonoBehaviourPun
 
     public void spawnPlayers()
     {
-        foreach(CharCursor_PN cursor in cursors)
+
+        foreach (CharCursor_PN cursor in cursors)
         {
-            photonView.RPC("spawnCharacter", RpcTarget.All, cursor.skinIndex);
+            if (cursor.photonView.IsMine)
+            {
+                photonView.RPC("spawnCharacter", RpcTarget.All, cursor.skinIndex);
+
+            }
         }
-        photonView.RPC("readyGame", RpcTarget.All);
+
+        
     }
 
     [PunRPC]
@@ -176,18 +182,28 @@ public class OnlineGameManager : MonoBehaviourPun
     {
         int x = UnityEngine.Random.Range(0, localPoints.Length);
         GameObject player = PhotonNetwork.Instantiate("Player", spawnPoints[x].position, Quaternion.identity);
-        player.GetComponent<PlayerController_PN>().skinIndex = skinIndex;
-        this.players.Add(player.GetComponent<PlayerController>());
+        player.GetComponent<PlayerController_PN>().photonView.RPC("initialize", RpcTarget.All, PhotonNetwork.LocalPlayer);
+        
 
     }
 
     void Update()
     {
+
+        if(!playersSpawned) {
+            if (players.Count == cursors.Length)
+            {
+                playersSpawned = true;
+
+                photonView.RPC("readyGame", RpcTarget.All);
+            }
+        }
+
         if (curTime <= 0) {
             winningPlayers.Clear();
             int highscore = 0;
             int index = 0;
-            foreach(PlayerController player in players)
+            foreach(PlayerController_PN player in players)
             {
                 if (player.score > highscore)
                 {
@@ -207,7 +223,7 @@ public class OnlineGameManager : MonoBehaviourPun
             if(winningPlayers.Count > 1)
             {
                 //tie
-                foreach(PlayerController player in players)
+                foreach(PlayerController_PN player in players)
                 {
                     if (!winningPlayers.Contains(player))
                     {
@@ -305,7 +321,7 @@ public class OnlineGameManager : MonoBehaviourPun
         RemoveAt(ref localPoints, x);
     }
  
-    public void onPlayerDeath(PlayerController player, PlayerController attacker)
+    public void onPlayerDeath(PlayerController_PN player, PlayerController_PN attacker)
     {
         if(attacker != null)
         {

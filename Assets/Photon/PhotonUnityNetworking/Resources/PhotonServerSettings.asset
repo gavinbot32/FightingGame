@@ -50,6 +50,7 @@ MonoBehaviour:
   - lockCursor
   - readyGame
   - spawnCharacter
+  - initialize
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
