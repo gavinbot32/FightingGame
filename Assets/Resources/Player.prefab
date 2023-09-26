@@ -316,8 +316,8 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 9162484146754979274}
+        m_TargetAssemblyTypeName: PlayerController_PN, Assembly-CSharp
         m_MethodName: onMoveInput
         m_Mode: 0
         m_Arguments:
@@ -332,7 +332,7 @@ MonoBehaviour:
     m_ActionName: mainControls/Move[/Keyboard/a,/Keyboard/d,/Keyboard/leftArrow,/Keyboard/rightArrow,/XInputControllerWindows/leftStick/left,/XInputControllerWindows/leftStick/right,/XInputControllerWindows/leftStick/down,/XInputControllerWindows/leftStick/up]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 9162484146754979274}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: onJumpInput
         m_Mode: 0
@@ -348,7 +348,7 @@ MonoBehaviour:
     m_ActionName: mainControls/Jump[/Keyboard/w,/Keyboard/upArrow,/XInputControllerWindows/buttonSouth]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 9162484146754979274}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: onBlockInput
         m_Mode: 0
@@ -364,7 +364,7 @@ MonoBehaviour:
     m_ActionName: mainControls/Block[/Keyboard/space,/XInputControllerWindows/leftTrigger]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 9162484146754979274}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: onPunchInput
         m_Mode: 0
@@ -380,7 +380,7 @@ MonoBehaviour:
     m_ActionName: mainControls/Melee[/Keyboard/e,/XInputControllerWindows/buttonEast]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 9162484146754979274}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: onRangedInput
         m_Mode: 0
@@ -396,7 +396,7 @@ MonoBehaviour:
     m_ActionName: mainControls/Ranged[/Keyboard/q,/XInputControllerWindows/buttonWest]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 9162484146754979274}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: onAbilityInput
         m_Mode: 0
@@ -412,7 +412,7 @@ MonoBehaviour:
     m_ActionName: mainControls/Ability[/Keyboard/r,/XInputControllerWindows/buttonNorth]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 9162484146754979274}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: onTauntInput
         m_Mode: 0
@@ -428,7 +428,7 @@ MonoBehaviour:
     m_ActionName: mainControls/Taunt1[/Keyboard/1,/XInputControllerWindows/dpad/up]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 9162484146754979274}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: onTauntInput
         m_Mode: 0
@@ -444,7 +444,7 @@ MonoBehaviour:
     m_ActionName: mainControls/Taunt2[/Keyboard/2,/XInputControllerWindows/dpad/right]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 9162484146754979274}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: onTauntInput
         m_Mode: 0
@@ -460,7 +460,7 @@ MonoBehaviour:
     m_ActionName: mainControls/Taunt3[/Keyboard/3,/XInputControllerWindows/dpad/down]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 9162484146754979274}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: onTauntInput
         m_Mode: 0
@@ -476,7 +476,7 @@ MonoBehaviour:
     m_ActionName: mainControls/Taunt4[/Keyboard/4,/XInputControllerWindows/dpad/left]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 9162484146754979274}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: onPauseInput
         m_Mode: 0
