@@ -28,6 +28,9 @@ public class CharCursor_PN : MonoBehaviourPun
     public int lifetime;
     public int skinIndex;
     private int punId;
+
+    
+
     // Start is called before the first frame update
     void Start()
     {

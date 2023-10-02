@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public GameManager manager;
+    public PauseManager pauseManager;
     public PlayerSettings settings;
     public PlayerSettings backup_settings;
 
@@ -70,12 +71,13 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         manager = FindObjectOfType<GameManager>();
+        pauseManager = FindObjectOfType<PauseManager>();
         audi = GetComponent<AudioSource>();
         rig = GetComponent<Rigidbody2D>();
         muzzle = GameObject.FindGameObjectWithTag("Muzzle").GetComponent<Transform>();
         if (settings.attackPrefabs == null || settings.attackPrefabs.Length <= 0)
         {
-            attackPrefab = backup_settings.attackPrefabs[Random.Range(0, settings.attackPrefabs.Length)];
+            attackPrefab = backup_settings.attackPrefabs[Random.Range(0, backup_settings.attackPrefabs.Length)];
         }
         else
         {
@@ -414,8 +416,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            print("pressed pause");
-
+            pauseManager.onPause();
         }   
     }
     public void onTabInput(InputAction.CallbackContext context)

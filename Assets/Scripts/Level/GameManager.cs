@@ -11,6 +11,7 @@ using Random = UnityEngine.Random;
 public class GameManager : MonoBehaviour
 {
     public PlayerSettings settings;
+    public PlayerSettings backup_settings;
 
     [Header("Player Refs")]
     public Dictionary<string,Sprite> player_badges_dict;

@@ -18,6 +18,11 @@ public class MenuController : MonoBehaviourPunCallbacks, ILobbyCallbacks
 
     public TextMeshProUGUI toastMsg;
     public GameObject loadingOBJ;
+
+    [Header("Non-Menus")]
+    public Button options_button;
+    public Button back_button;
+
     [Header("Menu Screens")]
     public GameObject mainUI;
     public GameObject createRoom;
@@ -106,6 +111,7 @@ public class MenuController : MonoBehaviourPunCallbacks, ILobbyCallbacks
             showMessage("Connecting To Sever");
         }
     }
+
     public void setScreen(GameObject screen)
     {
         mainUI.SetActive(false);
